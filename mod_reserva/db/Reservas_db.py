@@ -15,7 +15,7 @@ class ReservasDB(BaseModel):
 
 database_reservas: Dict[int, ReservasDB]
 
-database_users = {
+database_reservas = {
     1: ReservasDB(**{"id_reserva":1,
                        "id_quien_realiza": 43578657,
                        "nombre_cliente": "Carlos",
@@ -66,3 +66,10 @@ database_users = {
                        "cantidad_personas": 10
                        })
 }
+
+def actualizar_reserva(id_reserva: int, estado: str):
+    if id_reserva in database_reservas.keys():
+        database_reservas[id_reserva].estado_reserva = estado
+        return {"Reserva Actualizada": database_reservas[id_reserva]}
+    else:
+        return "Reserva no encontrada"
