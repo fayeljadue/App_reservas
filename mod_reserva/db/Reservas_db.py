@@ -5,9 +5,6 @@ from typing import Dict
 class ReservasDB(BaseModel):
 
     id_reserva: int
-    habitacion: str
-    fecha_inicio: date
-    fecha_fin: date
     id_quien_realiza: int
     nombre_cliente: str
     apellido_cliente: str
@@ -20,9 +17,6 @@ database_reservas: Dict[int, ReservasDB]
 
 database_users = {
     1: ReservasDB(**{"id_reserva":1,
-                       "habitacion":"1, 4, 5",
-                       "fecha_inicio":"2020-10-15",
-                       "fecha_fin":"2020-10-20",
                        "id_quien_realiza": 43578657,
                        "nombre_cliente": "Carlos",
                        "apellido_cliente": "Lopez",
@@ -33,9 +27,6 @@ database_users = {
                        }),
 
     2: ReservasDB(**{"id_reserva":2,
-                       "habitacion":"3",
-                       "fecha_inicio":"2020-11-01",
-                       "fecha_fin":"2020-11-04",
                        "id_quien_realiza": 103879657,
                        "nombre_cliente": "Andrea",
                        "apellido_cliente": "Hernandez",
@@ -46,9 +37,6 @@ database_users = {
                        }),
 
     3: ReservasDB(**{"id_reserva":3,
-                       "habitacion":"1, 2",
-                       "fecha_inicio":"2020-12-24",
-                       "fecha_fin":"2021-01-02",
                        "id_quien_realiza": 103879657,
                        "nombre_cliente": "Fernando",
                        "apellido_cliente": "Campos",
@@ -59,9 +47,6 @@ database_users = {
                        }),
 
     4: ReservasDB(**{"id_reserva":4,
-                       "habitacion":"2",
-                       "fecha_inicio":"2020-12-10",
-                       "fecha_fin":"2020-12-23",
                        "id_quien_realiza": 43578657,
                        "nombre_cliente": "Armando",
                        "apellido_cliente": "Corrales",
@@ -72,9 +57,6 @@ database_users = {
                        }),
 
     5: ReservasDB(**{"id_reserva":5,
-                       "habitacion":"3, 4, 5",
-                       "fecha_inicio":"2021-02-20",
-                       "fecha_fin":"2021-02-22",
                        "id_quien_realiza": 43578657,
                        "nombre_cliente": "Andres",
                        "apellido_cliente": "Ramos",
