@@ -78,10 +78,13 @@ def buscar_reserva_rango_f(f_ini_bus:date,f_fin_bus:date):
     Funcion que permite buscar dentro de una rango de fechas una reserva y retorna los ids
     """
     reservas_habitaciones=list()
+    reservas_id = set()
     for reserva_habitacion in database_ReservaHabitaciones.items():
         fecha_inicio=reserva_habitacion[1].fecha_inicio
         fecha_fin=reserva_habitacion[1].fecha_fin
-        if(f_ini_bus<=fecha_inicio<=f_fin_bus or f_ini_bus<=fecha_inicio<=f_fin_bus):
+        if(f_ini_bus<=fecha_inicio<=f_fin_bus or f_ini_bus<=fecha_fin<=f_fin_bus):
             reservas_habitaciones.append(reserva_habitacion)
-    
-    return reservas_habitaciones
+            reservas_id.add(reserva_habitacion[1].id_reserva)
+    if len(reservas_habitaciones) == 0:
+        return None,None
+    return reservas_id,reservas_habitaciones

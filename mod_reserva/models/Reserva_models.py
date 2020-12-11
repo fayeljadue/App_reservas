@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from datetime import date
+from typing import Dict,List
 
 class CheckOut(BaseModel):
     id_reserva: int
@@ -16,3 +18,12 @@ class ReservasVisualizar(BaseModel):
     contacto_cliente: str
     estado_reserva: str
     cantidad_personas: int
+
+class ReservasHabitaciones(BaseModel):
+    id_reserva: int
+    id_habitacion: int
+    fecha_inicio: date
+    fecha_fin: date
+
+class ReservasVisualzarCompletoOut(ReservasVisualizar):
+    lista_habitaciones: Dict[int,ReservasHabitaciones]

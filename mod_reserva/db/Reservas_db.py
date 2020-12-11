@@ -82,5 +82,11 @@ def get_idReserva(id_reserva :int):
         return None
 
 def update_CancelarReserva(id_reserva: int):
-        database_reservas[id_reserva].estado_reserva = "cancelada"
-        return {"Reserva Actualizada": database_reservas[id_reserva]}
+    database_reservas[id_reserva].estado_reserva = "cancelada"
+    return {"Reserva Actualizada": database_reservas[id_reserva]}
+
+def get_reservas(*arg:int):
+    reservas = []
+    for id in arg:
+        reservas.append(database_reservas[id])
+    return reservas
