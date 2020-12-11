@@ -7,6 +7,10 @@ from fastapi import FastAPI, HTTPException
 
 api = FastAPI()
 
+@api.get("/")
+async def index():
+    return {"mensaje":"Bienvenido a la app de nuestras reservas"}
+
 @api.put("/reserva/chekout")
 async def checkout(estado: CheckOut):
     resultado = actualizar_reserva(estado.id_reserva, estado.estado_reserva)
