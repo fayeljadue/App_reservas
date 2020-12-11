@@ -27,3 +27,7 @@ class ReservasHabitaciones(BaseModel):
 
 class ReservasVisualzarCompletoOut(ReservasVisualizar):
     lista_habitaciones: Dict[int,ReservasHabitaciones]
+
+class CheckIn(BaseModel):
+    id_reserva: int
+    estado_reserva: str

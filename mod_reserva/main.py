@@ -1,5 +1,5 @@
 from db.Reservas_db import actualizar_reserva,get_idReserva,update_CancelarReserva,get_reservas
-from db.ReservasHabitaciones_db import buscar_reserva_rango_f
+from db.ReservasHabitaciones_db import buscar_reserva_rango_f, get_fecha_inicio
 from models.Reserva_models import CheckOut,ReservasCancelado,ReservasVisualizar
 from models.Reserva_models import ReservasHabitaciones,ReservasVisualzarCompletoOut
 from datetime import date
@@ -64,3 +64,13 @@ async def visualizar_reservas(f_inicial:str,f_final:str):
         salidaReservasCompletas.append(ReservasVisualzarCompletoOut)
         habitaciones_reservadas.clear()
     return salidaReservasCompletas
+
+@api.put("/reserva/chekin")
+async def checkin(id_reserva: int):
+    fecha = date.today()
+    fecha_inicio_checkin = get_fecha_inicio(id_reserva)
+    if fecha_inicio_checkin != fecha:
+        raise HTTPException(status_code=404, detail="No se puede hacer check-in aún ")
+
+    resultado_in = actualizar_reserva(id_reserva,"progreso")
+    return {"mensaje":"Su check-in fue exitoso"}
