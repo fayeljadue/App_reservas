@@ -44,6 +44,7 @@ database_reservas = {
                        "contacto_cliente": "fercam@hotmail.com",
                        "estado_reserva": "pendiente",
                        "cantidad_personas": 4
+
                        }),
 
     4: ReservasDB(**{"id_reserva":4,
@@ -52,7 +53,7 @@ database_reservas = {
                        "apellido_cliente": "Corrales",
                        "cedula_cliente": 85746231,
                        "contacto_cliente": "armandocorrales@hotmail.com",
-                       "estado_reserva": "En progreso",
+                       "estado_reserva": "progreso",
                        "cantidad_personas": 1
                        }),
 
@@ -73,3 +74,13 @@ def actualizar_reserva(id_reserva: int, estado: str):
         return {"Reserva Actualizada": database_reservas[id_reserva]}
     else:
         return "Reserva no encontrada"
+
+def get_idReserva(id_reserva :int):
+    if id_reserva in database_reservas.keys():
+        return database_reservas[id_reserva]
+    else:
+        return None
+
+def update_CancelarReserva(id_reserva: int):
+        database_reservas[id_reserva].estado_reserva = "cancelada"
+        return {"Reserva Actualizada": database_reservas[id_reserva]}
