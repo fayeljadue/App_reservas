@@ -5,7 +5,7 @@ from typing import Dict
 class ReservasHabitacionesDB(BaseModel):
 
     id_reserva: int
-    id_habitacion: str
+    id_habitacion: int
     fecha_inicio: date
     fecha_fin: date
 
@@ -13,62 +13,75 @@ database_ReservaHabitaciones: Dict[int, ReservasHabitacionesDB]
 
 database_ReservaHabitaciones = {
     1: ReservasHabitacionesDB(**{"id_reserva":1,
-                       "habitacion":1,
-                       "fecha_inicio":"2020-10-15",
-                       "fecha_fin":"2020-10-20"
+                       "id_habitacion":1,
+                       "fecha_inicio":date(2020,10,15),
+                       "fecha_fin":date(2020,10,20)
                        }),
     
     2: ReservasHabitacionesDB(**{"id_reserva":1,
-                       "habitacion":4,
-                       "fecha_inicio":"2020-10-15",
-                       "fecha_fin":"2020-10-20"
+                       "id_habitacion":4,
+                       "fecha_inicio":date(2020,10,15),
+                       "fecha_fin":date(2020,10,20)
                        }),
 
     3: ReservasHabitacionesDB(**{"id_reserva":1,
-                       "habitacion":5,
-                       "fecha_inicio":"2020-10-15",
-                       "fecha_fin":"2020-10-20"
+                       "id_habitacion":5,
+                       "fecha_inicio":date(2020,10,15),
+                       "fecha_fin":date(2020,10,20)
                        }),
 
     4: ReservasHabitacionesDB(**{"id_reserva":2,
-                       "habitacion":3,
-                       "fecha_inicio":"2020-11-01",
-                       "fecha_fin":"2020-11-04"
+                       "id_habitacion":3,
+                       "fecha_inicio":date(2020,11,1),
+                       "fecha_fin":date(2020,11,4)
                        }),
 
     5: ReservasHabitacionesDB(**{"id_reserva":3,
-                       "habitacion":1,
-                       "fecha_inicio":"2020-12-24",
-                       "fecha_fin":"2021-01-02"
+                       "id_habitacion":1,
+                       "fecha_inicio":date(2020,12,24),
+                       "fecha_fin":date(2021,1,2)
                        }),
 
     6: ReservasHabitacionesDB(**{"id_reserva":3,
-                       "habitacion":2,
-                       "fecha_inicio":"2020-12-24",
-                       "fecha_fin":"2021-01-02"
+                       "id_habitacion":2,
+                       "fecha_inicio":date(2020,12,24),
+                       "fecha_fin":date(2021,1,2)
                        }),
 
     7: ReservasHabitacionesDB(**{"id_reserva":4,
-                       "habitacion":2,
-                       "fecha_inicio":"2020-12-10",
-                       "fecha_fin":"2020-12-23"
+                       "id_habitacion":2,
+                       "fecha_inicio":date(2020,12,10),
+                       "fecha_fin":date(2020,12,23)
                        }),
 
     8: ReservasHabitacionesDB(**{"id_reserva":5,
-                       "habitacion":3,
-                       "fecha_inicio":"2021-02-20",
-                       "fecha_fin":"2021-02-22"
+                       "id_habitacion":3,
+                       "fecha_inicio":date(2021,2,20),
+                       "fecha_fin":date(2021,2,22)
                        }),
     
     9: ReservasHabitacionesDB(**{"id_reserva":5,
-                       "habitacion":4,
-                       "fecha_inicio":"2021-02-20",
-                       "fecha_fin":"2021-02-22"
+                       "id_habitacion":4,
+                       "fecha_inicio":date(2021,2,20),
+                       "fecha_fin":date(2021,2,22)
                        }),
 
     10: ReservasHabitacionesDB(**{"id_reserva":5,
-                       "habitacion":5,
-                       "fecha_inicio":"2021-02-20",
-                       "fecha_fin":"2021-02-22"
+                       "id_habitacion":5,
+                       "fecha_inicio":date(2021,2,20),
+                       "fecha_fin":date(2021,2,22)
                        })
 }
+
+def buscar_reserva_rango_f(f_ini_bus:date,f_fin_bus:date):
+    """
+    Funcion que permite buscar dentro de una rango de fechas una reserva y retorna los ids
+    """
+    reservas_habitaciones=list()
+    for reserva_habitacion in database_ReservaHabitaciones.items():
+        fecha_inicio=reserva_habitacion[1].fecha_inicio
+        fecha_fin=reserva_habitacion[1].fecha_fin
+        if(f_ini_bus<=fecha_inicio<=f_fin_bus or f_ini_bus<=fecha_inicio<=f_fin_bus):
+            reservas_habitaciones.append(reserva_habitacion)
+    
+    return reservas_habitaciones
