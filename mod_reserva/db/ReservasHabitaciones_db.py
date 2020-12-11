@@ -11,7 +11,7 @@ class ReservasHabitacionesDB(BaseModel):
 
 database_ReservaHabitaciones: Dict[int, ReservasHabitacionesDB]
 
-database_users = {
+database_ReservaHabitaciones = {
     1: ReservasHabitacionesDB(**{"id_reserva":1,
                        "habitacion":1,
                        "fecha_inicio":"2020-10-15",
