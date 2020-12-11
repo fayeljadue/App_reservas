@@ -14,7 +14,7 @@ database_ReservaHabitaciones: Dict[int, ReservasHabitacionesDB]
 database_ReservaHabitaciones = {
     1: ReservasHabitacionesDB(**{"id_reserva":1,
                        "id_habitacion":1,
-                       "fecha_inicio":date(2020,10,15),
+                       "fecha_inicio":date(2020,12,11),
                        "fecha_fin":date(2020,10,20)
                        }),
     
@@ -88,3 +88,11 @@ def buscar_reserva_rango_f(f_ini_bus:date,f_fin_bus:date):
     if len(reservas_habitaciones) == 0:
         return None,None
     return reservas_id,reservas_habitaciones
+
+def get_fecha_inicio(id_reserva: int):
+    if id_reserva in database_ReservaHabitaciones.keys():
+        prueba = database_ReservaHabitaciones[id_reserva].fecha_inicio
+        print(prueba)
+        return database_ReservaHabitaciones[id_reserva].fecha_inicio
+    else:
+        return None
