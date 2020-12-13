@@ -14,7 +14,7 @@ database_ReservaHabitaciones: Dict[int, ReservasHabitacionesDB]
 database_ReservaHabitaciones = {
     1: ReservasHabitacionesDB(**{"id_reserva":1,
                        "id_habitacion":1,
-                       "fecha_inicio":date(2020,12,11),
+                       "fecha_inicio":date(2020,10,15),
                        "fecha_fin":date(2020,10,20)
                        }),
     
@@ -70,6 +70,11 @@ database_ReservaHabitaciones = {
                        "id_habitacion":5,
                        "fecha_inicio":date(2021,2,20),
                        "fecha_fin":date(2021,2,22)
+                       }),
+    11: ReservasHabitacionesDB(**{"id_reserva":6,
+                       "id_habitacion":5,
+                       "fecha_inicio":date(2020,12,13),
+                       "fecha_fin":date(2020,12,23)
                        })
 }
 

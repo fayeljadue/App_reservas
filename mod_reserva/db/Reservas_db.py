@@ -65,7 +65,16 @@ database_reservas = {
                        "contacto_cliente": "anram@hotmail.com",
                        "estado_reserva": "cancelada",
                        "cantidad_personas": 10
-                       })
+                       }),
+    6: ReservasDB(**{"id_reserva":6,
+                       "id_quien_realiza": 43578657,
+                       "nombre_cliente": "Jose",
+                       "apellido_cliente": "Ruiz",
+                       "cedula_cliente": 1036463562,
+                       "contacto_cliente": "jruis84@hotmail.com",
+                       "estado_reserva": "pendiente",
+                       "cantidad_personas": 3
+                       }),
 }
 
 def actualizar_reserva(id_reserva: int, estado: str):
