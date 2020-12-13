@@ -78,11 +78,8 @@ database_reservas = {
 }
 
 def actualizar_reserva(id_reserva: int, estado: str):
-    if id_reserva in database_reservas.keys():
-        database_reservas[id_reserva].estado_reserva = estado
-        return {"Reserva Actualizada": database_reservas[id_reserva]}
-    else:
-        return "Reserva no encontrada"
+    database_reservas[id_reserva].estado_reserva = estado
+    return {"Reserva Actualizada": database_reservas[id_reserva]}
 
 def get_idReserva(id_reserva :int):
     if id_reserva in database_reservas.keys():

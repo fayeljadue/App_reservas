@@ -13,7 +13,17 @@ async def index():
 
 @api.put("/reserva/chekout")
 async def checkout(estado: CheckOut):
-    resultado = actualizar_reserva(estado.id_reserva, estado.estado_reserva)
+    
+    reserva_in_db = get_idReserva(estado.id_reserva)
+
+    if reserva_in_db == None:
+        raise HTTPException(status_code=404,detail="la reserva no existe")
+
+    if reserva_in_db.estado_reserva in ["cancelada","completada"]:
+        raise HTTPException(status_code=400, detail="No se puede hacer CheckOut en la reserva")
+    
+    resultado = actualizar_reserva(estado.id_reserva, "completada")
+    
     return resultado
 
 
