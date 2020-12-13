@@ -4,7 +4,6 @@ from typing import Dict,List
 
 class CheckOut(BaseModel):
     id_reserva: int
-    estado_reserva: str
 
 class ReservasCancelado(BaseModel):
       id_reserva: int
