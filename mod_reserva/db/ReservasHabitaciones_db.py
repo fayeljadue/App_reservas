@@ -2,6 +2,8 @@ from pydantic import BaseModel
 from datetime import date
 from typing import Dict
 
+from pydantic.errors import DateTimeError
+
 class ReservasHabitacionesDB(BaseModel):
 
     id_reserva: int
@@ -90,14 +92,24 @@ def buscar_reserva_rango_f(f_ini_bus:date,f_fin_bus:date):
         if(f_ini_bus<=fecha_inicio<=f_fin_bus or f_ini_bus<=fecha_fin<=f_fin_bus):
             reservas_habitaciones.append(reserva_habitacion)
             reservas_id.add(reserva_habitacion[1].id_reserva)
-    if len(reservas_habitaciones) == 0:
-        return None,None
-    return reservas_id,reservas_habitaciones
+    if reservas_habitaciones:
+        return reservas_id,reservas_habitaciones
+    return None,None
 
 def get_fecha_inicio(id_reserva: int):
     if id_reserva in database_ReservaHabitaciones.keys():
-        prueba = database_ReservaHabitaciones[id_reserva].fecha_inicio
-        print(prueba)
         return database_ReservaHabitaciones[id_reserva].fecha_inicio
+    else:
+        return None
+
+def get_por_id_reserva_habitaciones(id:int):
+    reservas_habitaciones = dict()
+    
+    for identificador,reserva_habitacion in database_ReservaHabitaciones.items():
+        if(reserva_habitacion.id_reserva==id):
+            reservas_habitaciones[identificador] = reserva_habitacion
+    
+    if reservas_habitaciones:
+        return reservas_habitaciones
     else:
         return None

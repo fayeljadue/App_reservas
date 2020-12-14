@@ -96,3 +96,15 @@ def get_reservas(*arg:int):
     for id in arg:
         reservas.append(database_reservas[id])
     return reservas
+
+def get_reservas_estado(estado:str):
+    reservas = []
+    for reserva in database_reservas.keys():
+        valor_reserva = database_reservas[reserva]
+        if valor_reserva.estado_reserva == estado:
+            reservas.append(valor_reserva)
+    
+    if len(reservas) == 0:
+        return None
+    else:
+        return reservas

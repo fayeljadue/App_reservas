@@ -1,5 +1,5 @@
-from db.Reservas_db import actualizar_reserva,get_idReserva,update_CancelarReserva,get_reservas
-from db.ReservasHabitaciones_db import buscar_reserva_rango_f, get_fecha_inicio
+from db.Reservas_db import actualizar_reserva,get_idReserva,update_CancelarReserva,get_reservas,get_reservas_estado
+from db.ReservasHabitaciones_db import buscar_reserva_rango_f, get_fecha_inicio,get_por_id_reserva_habitaciones
 from models.Reserva_models import CheckOut,ReservasCancelado,ReservasVisualizar
 from models.Reserva_models import ReservasHabitaciones,ReservasVisualzarCompletoOut
 from datetime import date
@@ -77,10 +77,27 @@ async def visualizar_reservas(f_inicial:str,f_final:str):
 
 @api.put("/reserva/chekin")
 async def checkin(id_reserva: int):
+    
     fecha = date.today()
     fecha_inicio_checkin = get_fecha_inicio(id_reserva)
+    
     if fecha_inicio_checkin != fecha:
         raise HTTPException(status_code=404, detail="No se puede hacer check-in aún ")
 
     resultado_in = actualizar_reserva(id_reserva,"progreso")
     return {"mensaje":"Su check-in fue exitoso"}
+
+@api.get("/reserva/empleado/visualizar/{estado}")
+async def ver_reservas_por_estado(estado:str):
+    
+    reservas_por_estados =  get_reservas_estado(estado)
+    salidaReservasCompletas = []
+
+    if(reservas_por_estados != None):
+        for reserva_por_estado in reservas_por_estados:
+            reservas_habitacion = get_por_id_reserva_habitaciones(reserva_por_estado.id_reserva)
+            ReservasVisualzarCompletoOut = {**reserva_por_estado.dict(),"lista_habitaciones":reservas_habitacion}
+            salidaReservasCompletas.append(ReservasVisualzarCompletoOut)
+    else:
+        return {"mensaje":"No hay usuarios"}
+    return salidaReservasCompletas
