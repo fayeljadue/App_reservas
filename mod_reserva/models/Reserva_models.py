@@ -25,7 +25,7 @@ class ReservasHabitaciones(BaseModel):
     fecha_fin: date
 
 class ReservasVisualzarCompletoOut(ReservasVisualizar):
-    lista_habitaciones: Dict[int,ReservasHabitaciones]
+    lista_habitaciones: List[int]
 
 class CheckIn(BaseModel):
     id_reserva: int

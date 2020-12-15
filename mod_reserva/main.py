@@ -7,6 +7,16 @@ from fastapi import FastAPI, HTTPException
 
 api = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "http://localhost:8080"
+]
+api.add_middleware(
+    CORSMiddleware, allow_origins=origins,
+    allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
+)
+
 @api.get("/")
 async def index():
     return {"mensaje":"Bienvenido a la app de nuestras reservas"}
@@ -69,10 +79,9 @@ async def visualizar_reservas(f_inicial:str,f_final:str):
         habitaciones_reservadas =[]
         for reserva_habitacion in reservas_habitaciones:
             if reserva_habitacion[1].id_reserva == reserva.id_reserva:
-                habitaciones_reservadas.append(reserva_habitacion)
-        ReservasVisualzarCompletoOut = {**reserva.dict(),"lista_habitaciones":dict(habitaciones_reservadas)}
+                habitaciones_reservadas.append(reserva_habitacion[1].id_habitacion)
+        ReservasVisualzarCompletoOut = {**reserva.dict(),"lista_habitaciones":habitaciones_reservadas}
         salidaReservasCompletas.append(ReservasVisualzarCompletoOut)
-        habitaciones_reservadas.clear()
     return salidaReservasCompletas
 
 @api.put("/reserva/chekin")

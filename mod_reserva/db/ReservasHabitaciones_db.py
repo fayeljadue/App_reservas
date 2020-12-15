@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import date
-from typing import Dict
+from typing import Dict,List
 
 from pydantic.errors import DateTimeError
 
@@ -103,12 +103,11 @@ def get_fecha_inicio(id_reserva: int):
         return None
 
 def get_por_id_reserva_habitaciones(id:int):
-    reservas_habitaciones = dict()
+    reservas_habitaciones = []
     
     for identificador,reserva_habitacion in database_ReservaHabitaciones.items():
         if(reserva_habitacion.id_reserva==id):
-            reservas_habitaciones[identificador] = reserva_habitacion
-    
+            reservas_habitaciones.append(reserva_habitacion.id_habitacion)
     if reservas_habitaciones:
         return reservas_habitaciones
     else:
