@@ -13,7 +13,7 @@ class ReservasVisualizar(BaseModel):
     id_quien_realiza: int
     nombre_cliente: str
     apellido_cliente: str
-    cedula_cliente: str
+    cedula_cliente: int
     contacto_cliente: str
     estado_reserva: str
     cantidad_personas: int

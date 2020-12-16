@@ -8,7 +8,7 @@ class ReservasDB(BaseModel):
     id_quien_realiza: int
     nombre_cliente: str
     apellido_cliente: str
-    cedula_cliente: str
+    cedula_cliente: int
     contacto_cliente: str
     estado_reserva: str
     cantidad_personas: int
@@ -96,6 +96,18 @@ def get_reservas(*arg:int):
     for id in arg:
         reservas.append(database_reservas[id])
     return reservas
+
+def get_reservas_cedula(cedula: str):
+    print(cedula)
+    reservas = []
+    for reserva in database_reservas.keys():
+        datos_reserva = database_reservas[reserva]
+        if datos_reserva.cedula_cliente == cedula:
+            reservas.append(datos_reserva)
+    if len(reservas) == 0:
+        return None
+    else:
+        return reservas
 
 def get_reservas_estado(estado:str):
     reservas = []

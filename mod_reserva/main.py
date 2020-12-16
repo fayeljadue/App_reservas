@@ -1,4 +1,4 @@
-from db.Reservas_db import actualizar_reserva,get_idReserva,update_CancelarReserva,get_reservas,get_reservas_estado
+from db.Reservas_db import actualizar_reserva,get_idReserva,update_CancelarReserva,get_reservas,get_reservas_estado, get_reservas_cedula
 from db.ReservasHabitaciones_db import buscar_reserva_rango_f, get_fecha_inicio,get_por_id_reserva_habitaciones
 from models.Reserva_models import CheckOut,ReservasCancelado,ReservasVisualizar
 from models.Reserva_models import ReservasHabitaciones,ReservasVisualzarCompletoOut
@@ -111,3 +111,19 @@ async def ver_reservas_por_estado(estado:str):
     else:
         return {"mensaje":"No hay usuarios"}
     return salidaReservasCompletas
+
+@api.get("/reserva/empleado/buscar/{cedula}")
+async def ver_reservas_por_cedula(cedula: int):
+    
+    reservas = get_reservas_cedula(cedula)
+    reservas_cedula = []
+
+    if(reservas != None):
+        for reserva in reservas:
+            habitaciones = get_por_id_reserva_habitaciones(reserva.id_reserva)
+            ReservasVisualzarCompletoOut = {**reserva.dict(),"lista_habitaciones":habitaciones}
+            reservas_cedula.append(ReservasVisualzarCompletoOut)
+    else:
+        raise HTTPException(status_code=404,detail="La cédula no existe")
+        return {"mensaje":"El cliente no tiene reservas"}
+    return reservas_cedula
