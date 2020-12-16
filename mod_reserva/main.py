@@ -91,7 +91,7 @@ async def checkin(id_reserva: int):
     fecha_inicio_checkin = get_fecha_inicio(id_reserva)
     
     if fecha_inicio_checkin != fecha:
-        return {"mensaje":"Su check-in no se puede relizar hasta el dia "+str(fecha_inicio_checkin)}
+        raise HTTPException(status_code=404, detail="Su check-in no se puede relizar hasta el dia ")
     
 
     resultado_in = actualizar_reserva(id_reserva,"progreso")
