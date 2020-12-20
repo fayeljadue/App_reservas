@@ -1,7 +1,9 @@
 from db.Reservas_db import actualizar_reserva,get_idReserva,update_CancelarReserva,get_reservas,get_reservas_estado, get_reservas_cedula
 from db.ReservasHabitaciones_db import buscar_reserva_rango_f, get_fecha_inicio,get_por_id_reserva_habitaciones
+from db.empleados_db import obtener_usuario
 from models.Reserva_models import CheckOut,ReservasCancelado,ReservasVisualizar
 from models.Reserva_models import ReservasHabitaciones,ReservasVisualzarCompletoOut
+from models.Reserva_models import UsrLogin
 from datetime import date
 from fastapi import FastAPI, HTTPException
 
@@ -127,3 +129,15 @@ async def ver_reservas_por_cedula(cedula: int):
         raise HTTPException(status_code=404,detail="La cédula no existe")
         return {"mensaje":"El cliente no tiene reservas"}
     return reservas_cedula
+
+@api.post("/login")
+async def login(usr: UsrLogin):
+    usuario = obtener_usuario(usr.usuario)
+
+    if usuario == None:
+        raise HTTPException(status_code=404,detail="El usuario no existe")
+    else:
+        if usuario.contrasenia != usr.contrasenia:
+            raise HTTPException(status_code=403,detail="Contraseña incorrecta")
+        else:
+            return {"Autenticado": True}

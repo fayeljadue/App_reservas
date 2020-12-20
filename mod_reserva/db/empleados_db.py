@@ -10,7 +10,7 @@ class EmpleadosDB(BaseModel):
 
 database_empleados: Dict[int, EmpleadosDB]
 
-database_habitaciones = {
+database_empleados = {
     
         43578657: EmpleadosDB(**{"id_empleado":43578657,
                                 "nombre":"Antonio",
@@ -25,3 +25,9 @@ database_habitaciones = {
                                 "contrasenia":"emprodriguez",
                             }),
 }
+
+def obtener_usuario(alias: str):
+    for empleado in database_empleados.values():
+        if empleado.alias == alias:
+            return empleado
+    return None

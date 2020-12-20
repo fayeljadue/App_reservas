@@ -30,3 +30,7 @@ class ReservasVisualzarCompletoOut(ReservasVisualizar):
 class CheckIn(BaseModel):
     id_reserva: int
     estado_reserva: str
+
+class UsrLogin(BaseModel):
+    usuario: str
+    contrasenia: str
